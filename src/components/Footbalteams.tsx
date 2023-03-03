@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {SyntheticEvent, useState} from 'react';
 
 let initialTeams = [
     {name: "Real Madrid", points: 72},
@@ -11,11 +11,14 @@ function footbalteams() {
     const [teams, setTeams] = useState(initialTeams)
     const [footbalteam, setfootbalteam] = useState('')
     const [points, setpoints] = useState(0)
+    const handleSubmit = (event: SyntheticEvent) => {
+        event.preventDefault();
+    }
 
     return (
         <div>
             <div>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <div className="input-group">
                         <label htmlFor="name">Footbalteam name:</label>
                         <input type="text" value={footbalteam} onChange={(event) => {
@@ -33,7 +36,7 @@ function footbalteams() {
                     }}>Přidat</button>
                 </form>
             </div>
-        {initialTeams.map((people) => {
+        {teams.map((people) => {
             return (<div><ul>{people.name}</ul><ul>{people.points}</ul></div>)
         })}</div>
     )
